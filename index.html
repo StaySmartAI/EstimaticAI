@@ -605,20 +605,23 @@
           <p>Tell us what service you offer, how you price it, and what you want the customer to do after seeing their estimate.</p>
           <p class="muted">Email john@yetton.com or call 07486 892433 or use the form below to enquire about a calculator.</p>
         </div>
-        <form name="contact" method="POST" data-netlify="true">
-          <input type="hidden" name="form-name" value="contact">
-          
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" placeholder="Your name" />
+        <form name="contact" method="POST" data-netlify="true" action="/thank-you">
+  <input type="hidden" name="form-name" value="contact">
 
-          <label for="business">Business type</label>
-          <input id="business" name="business" type="text" placeholder="e.g. Jet washing, gardening, window cleaning" />
+  <label for="name">Name</label>
+  <input id="name" name="name" type="text" placeholder="Your name" required />
 
-          <label for="message">What should your calculator estimate?</label>
-          <textarea id="message" name="message" rows="5" placeholder="Tell me about your pricing, service area and ideal customer enquiry."></textarea>
+  <label for="phone">Contact number</label>
+  <input id="phone" name="phone" type="tel" placeholder="Your contact number" required />
 
-          <button class="button" type="submit">Send enquiry</button>
-        </form>
+  <label for="business">Business type</label>
+  <input id="business" name="business" type="text" placeholder="e.g. Jet washing, gardening, window cleaning" required />
+
+  <label for="message">What should your calculator estimate?</label>
+  <textarea id="message" name="message" rows="5" placeholder="Tell me about your pricing, service area and ideal customer enquiry." required></textarea>
+
+  <button class="button" type="submit">Send enquiry</button>
+</form>
       </div>
     </section>
   </main>
