@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You | EstimaticAI</title>
+  <meta name="description" content="Thank you for your enquiry. We'll be in touch soon." />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0d1b2f;
+      --card: #ffffff;
+      --text: #ffffff;
+      --muted: #b8c2d6;
+      --dark: #07111f;
+      --blue: #0099ff;
+      --blue-dark: #0077cc;
+      --line: rgba(255,255,255,0.14);
+      --green: #35d399;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 24px 0;
+      position: sticky;
+      top: 0;
+      background: rgba(7,17,31,0.88);
+      backdrop-filter: blur(14px);
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.8px;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: var(--blue);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+      box-shadow: 0 14px 32px rgba(0,153,255,0.24);
+    }
+
+    .button:hover {
+      background: var(--blue-dark);
+    }
+
+    .thank-you {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 200px);
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .thank-you-content {
+      max-width: 600px;
+    }
+
+    .thank-you-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(53,211,153,0.14);
+      color: var(--green);
+      display: grid;
+      place-items: center;
+      font-size: 36px;
+      font-weight: 900;
+      margin: 0 auto 28px;
+    }
+
+    .thank-you-content h1 {
+      margin: 0;
+      font-size: clamp(34px, 4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: -2px;
+    }
+
+    .thank-you-content p {
+      color: var(--muted);
+      font-size: 18px;
+      margin: 16px 0 0;
+    }
+
+    .thank-you-content .button {
+      margin-top: 32px;
+    }
+
+    footer {
+      padding: 34px 0;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="/">Estimatic<span>AI</span></a>
+      <a class="button" href="/#contact">Get started</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="thank-you">
+      <div class="thank-you-content">
+        <div class="thank-you-icon">&#10003;</div>
+        <h1>Thank you for your enquiry!</h1>
+        <p>Your message has been received. We'll review your details and get back to you as soon as possible to discuss your quote calculator.</p>
+        <a class="button" href="/">Back to homepage</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>&copy; 2026 EstimaticAI. All rights reserved.</span>
+      <span>Instant quote calculators for local service businesses.</span>
+    </div>
+  </footer>
+</body>
+</html>
