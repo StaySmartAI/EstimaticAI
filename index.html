@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EstimaticAI | Instant Quote Calculators for Local Service Businesses</title>
+  <meta name="description" content="EstimaticAI creates instant quote calculators for local service businesses, helping turn website visitors into qualified leads." />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0d1b2f;
+      --card: #ffffff;
+      --text: #ffffff;
+      --muted: #b8c2d6;
+      --dark: #07111f;
+      --blue: #0099ff;
+      --blue-dark: #0077cc;
+      --line: rgba(255,255,255,0.14);
+      --green: #35d399;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 24px 0;
+      position: sticky;
+      top: 0;
+      background: rgba(7,17,31,0.88);
+      backdrop-filter: blur(14px);
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.8px;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: var(--blue);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+      box-shadow: 0 14px 32px rgba(0,153,255,0.24);
+    }
+
+    .button:hover {
+      background: var(--blue-dark);
+    }
+
+    .button.secondary {
+      background: transparent;
+      border: 1px solid var(--line);
+      box-shadow: none;
+    }
+
+    .hero {
+      padding: 92px 0 70px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 0.96;
+      letter-spacing: -3px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 20px;
+      max-width: 630px;
+      margin: 26px 0 0;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 34px;
+    }
+
+    .trust-row {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .trust-row strong {
+      color: #ffffff;
+    }
+
+    .demo-card {
+      background: #ffffff;
+      color: var(--dark);
+      border-radius: 28px;
+      padding: 30px;
+      box-shadow: 0 28px 80px rgba(0,0,0,0.42);
+      transform: rotate(1deg);
+    }
+
+    .demo-top {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .demo-top h2 {
+      margin: 0;
+      font-size: 30px;
+      letter-spacing: -1px;
+    }
+
+    .demo-top p {
+      margin: 6px 0 0;
+      font-size: 15px;
+      color: #667085;
+    }
+
+    label {
+      display: block;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 16px;
+      border: 2px solid #d9e2ef;
+      border-radius: 14px;
+      font-size: 17px;
+      font-family: inherit;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(0,153,255,0.12);
+    }
+
+    .results {
+      background: #f3f8ff;
+      border: 2px solid #d7ecff;
+      border-radius: 18px;
+      padding: 20px;
+      margin-top: 8px;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+      font-size: 17px;
+    }
+
+    .result-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .result-value {
+      font-weight: 900;
+    }
+
+    .price {
+      font-size: 28px;
+      color: var(--blue-dark);
+    }
+
+    section {
+      padding: 76px 0;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin-bottom: 34px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(34px, 4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: -2px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 18px;
+      margin: 16px 0 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 26px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing: -0.5px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: rgba(0,153,255,0.14);
+      color: var(--blue);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 34px;
+      align-items: start;
+    }
+
+    .list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .list-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      color: var(--muted);
+    }
+
+    .tick {
+      width: 24px;
+      height: 24px;
+      flex: 0 0 24px;
+      border-radius: 50%;
+      background: rgba(53,211,153,0.14);
+      color: var(--green);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      margin-top: 2px;
+    }
+
+    .offer {
+      background: linear-gradient(135deg, rgba(0,153,255,0.16), rgba(53,211,153,0.08));
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      padding: 38px;
+    }
+
+    .price-box {
+      background: #ffffff;
+      color: var(--dark);
+      border-radius: 28px;
+      padding: 32px;
+    }
+
+    .price-box h3 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: -1px;
+    }
+
+    .price-box .amount {
+      font-size: 48px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      margin: 14px 0 8px;
+    }
+
+    .price-box p {
+      color: #667085;
+      margin: 0 0 22px;
+    }
+
+    .future-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .contact {
+      background: #ffffff;
+      color: var(--dark);
+      border-radius: 32px;
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 34px;
+      align-items: start;
+    }
+
+    .contact h2 {
+      margin: 0;
+      font-size: 42px;
+      line-height: 1.05;
+      letter-spacing: -2px;
+    }
+
+    .contact p {
+      color: #667085;
+      font-size: 18px;
+    }
+
+    .contact .button {
+      width: 100%;
+      margin-top: 4px;
+    }
+
+    footer {
+      padding: 34px 0;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .split,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-3,
+      .future-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 62px;
+      }
+
+      .demo-card {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="https://estimaticai.netlify.app">Estimatic<span>AI</span></a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#calculator">Calculator</a>
+        <a href="#benefits">Benefits</a>
+        <a href="#future">Future products</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="button" href="#contact">Get started</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Instant quote calculators for local service businesses</div>
+          <h1>Turn website visitors into priced-up enquiries.</h1>
+          <p>EstimaticAI builds simple, branded quote calculators that help customers get an instant estimate before they call, message or book.</p>
+          <div class="hero-actions">
+            <a class="button" href="#contact">Request a calculator</a>
+            <a class="button secondary" href="#calculator">See how it works</a>
+          </div>
+          <div class="trust-row">
+            <span><strong>Fast</strong> to launch</span>
+            <span><strong>Easy</strong> for customers</span>
+            <span><strong>Built</strong> for lead generation</span>
+          </div>
+        </div>
+
+        <aside class="demo-card" id="calculator" aria-label="Example instant quote calculator">
+          <div class="demo-top">
+            <h2>Example Quote Calculator</h2>
+            <p>Drive, patio and decking cleaning estimate</p>
+          </div>
+
+          <label for="length">Length (m)</label>
+          <input id="length" type="number" min="0" step="0.1" placeholder="Enter length" />
+
+          <label for="width">Width (m)</label>
+          <input id="width" type="number" min="0" step="0.1" placeholder="Enter width" />
+
+          <section class="results" aria-live="polite">
+            <div class="result-row">
+              <span>Area total</span>
+              <span class="result-value" id="area">0 m²</span>
+            </div>
+            <div class="result-row">
+              <span>Estimated cost</span>
+              <span class="result-value price" id="cost">£0.00</span>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <section id="benefits">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Give customers a price before your competitors reply.</h2>
+          <p>Most local service websites ask customers to fill in a contact form and wait. A calculator gives them useful information straight away, while giving you a better-qualified lead.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="icon">1</div>
+            <h3>Instant estimates</h3>
+            <p>Customers enter a few details and receive a clear price guide immediately.</p>
+          </article>
+          <article class="card">
+            <div class="icon">2</div>
+            <h3>Better enquiries</h3>
+            <p>Leads arrive with useful job details such as measurements, service type or estimated budget.</p>
+          </article>
+          <article class="card">
+            <div class="icon">3</div>
+            <h3>Built around your business</h3>
+            <p>Your calculator can match your pricing, services, brand colours and call-to-action.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container split">
+        <div class="section-heading">
+          <h2>Ideal for trades and service businesses.</h2>
+          <p>EstimaticAI is designed for businesses where a simple formula, area, quantity or service choice can produce a helpful estimate.</p>
+        </div>
+        <div class="list">
+          <div class="list-item"><span class="tick">✓</span><span>Jet washing, patio cleaning and driveway cleaning</span></div>
+          <div class="list-item"><span class="tick">✓</span><span>Gardening, lawn care and landscaping</span></div>
+          <div class="list-item"><span class="tick">✓</span><span>Window cleaning, gutter cleaning and exterior cleaning</span></div>
+          <div class="list-item"><span class="tick">✓</span><span>Flooring, painting, fencing and other measured services</span></div>
+          <div class="list-item"><span class="tick">✓</span><span>Any business that wants quicker, clearer customer enquiries</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container offer">
+        <div class="split">
+          <div>
+            <div class="section-heading">
+              <h2>Start with the quote calculator.</h2>
+              <p>For now, EstimaticAI focuses on one simple product: a branded instant quote calculator you can add to your website, QR code, landing page or social media profile.</p>
+            </div>
+            <div class="list">
+              <div class="list-item"><span class="tick">✓</span><span>Custom pricing logic for your service</span></div>
+              <div class="list-item"><span class="tick">✓</span><span>Mobile-friendly design</span></div>
+              <div class="list-item"><span class="tick">✓</span><span>Clear customer call-to-action</span></div>
+              <div class="list-item"><span class="tick">✓</span><span>Optional QR code use for flyers, vans and posters</span></div>
+            </div>
+          </div>
+
+          <aside class="price-box">
+            <h3>Instant Quote Calculator</h3>
+            <div class="amount">From £___</div>
+            <p>Add your starting price when ready. You can offer a one-off build fee, monthly support package, or both.</p>
+            <a class="button" href="#contact">Ask about a calculator</a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="future">
+      <div class="container">
+        <div class="section-heading">
+          <h2>More AI tools are coming.</h2>
+          <p>The calculator is the first step. EstimaticAI can grow into a wider toolkit for small businesses that want to capture, qualify and convert more leads.</p>
+        </div>
+        <div class="future-grid">
+          <article class="card">
+            <div class="icon">☎</div>
+            <h3>AI call answering</h3>
+            <p>Capture missed calls and collect useful customer details when you are busy.</p>
+          </article>
+          <article class="card">
+            <div class="icon">📅</div>
+            <h3>Booking calendar</h3>
+            <p>Let customers request or book available time slots online.</p>
+          </article>
+          <article class="card">
+            <div class="icon">↗</div>
+            <h3>Lead generation</h3>
+            <p>Use simple AI-powered funnels to turn more visits into enquiries.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container contact">
+        <div>
+          <h2>Ready to build your first calculator?</h2>
+          <p>Tell me what service you offer, how you price it, and what you want the customer to do after seeing their estimate.</p>
+          <p class="muted">Replace the email address below with your preferred contact details before publishing.</p>
+        </div>
+        <form action="mailto:hello@estimaticai.co.uk" method="post" enctype="text/plain">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" />
+
+          <label for="business">Business type</label>
+          <input id="business" name="business" type="text" placeholder="e.g. Jet washing, gardening, window cleaning" />
+
+          <label for="message">What should your calculator estimate?</label>
+          <textarea id="message" name="message" rows="5" placeholder="Tell me about your pricing, service area and ideal customer enquiry."></textarea>
+
+          <button class="button" type="submit">Send enquiry</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>© 2026 EstimaticAI. All rights reserved.</span>
+      <span>Instant quote calculators for local service businesses.</span>
+    </div>
+  </footer>
+
+  <script>
+    const pricePerSquareMetre = 3;
+    const lengthInput = document.getElementById('length');
+    const widthInput = document.getElementById('width');
+    const areaOutput = document.getElementById('area');
+    const costOutput = document.getElementById('cost');
+
+    function calculateQuote() {
+      const length = parseFloat(lengthInput.value) || 0;
+      const width = parseFloat(widthInput.value) || 0;
+      const area = length * width;
+      const cost = area * pricePerSquareMetre;
+
+      areaOutput.textContent = `${area.toFixed(2)} m²`;
+      costOutput.textContent = `£${cost.toFixed(2)}`;
+    }
+
+    lengthInput.addEventListener('input', calculateQuote);
+    widthInput.addEventListener('input', calculateQuote);
+  </script>
+</body>
+</html>
