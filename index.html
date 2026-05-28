@@ -605,8 +605,8 @@
           <p>Tell us what service you offer, how you price it, and what you want the customer to do after seeing their estimate.</p>
           <p class="muted">Email john@yetton.com or use the form below to enquire about a calculator.</p>
         </div>
-        <form name="contact" method="POST" data-netlify="true">
-          <input type="hidden" name="form-name" value="contact">
+        <form name="contact" method="POST" data-netlify="true" action="/thank-you">
+            <input type="hidden" name="form-name" value="contact">
           
           <label for="name">Name</label>
           <input id="name" name="name" type="text" placeholder="Your name" />
